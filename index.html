@@ -1,8 +1,11 @@
+```html
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="theme-color" content="#fce4ec">
+
   <title>Una domanda per te ❤️</title>
 
   <style>
@@ -18,17 +21,23 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: 16px;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: linear-gradient(135deg, #fff5f7, #fce4ec, #fff);
       overflow: hidden;
       color: #3d3033;
     }
 
+    /* =========================
+       CUORI ANIMATI
+    ========================= */
+
     .hearts {
       position: fixed;
       inset: 0;
       pointer-events: none;
       overflow: hidden;
+      z-index: 1;
     }
 
     .heart {
@@ -55,17 +64,30 @@
       }
     }
 
+    /* =========================
+       CARD
+    ========================= */
+
     .card {
-      width: calc(100% - 32px);
+      width: 100%;
       max-width: 430px;
+      max-height: 90vh;
+      overflow-y: auto;
       padding: 42px 25px;
       text-align: center;
-      background: rgba(255, 255, 255, .82);
+
+      background: rgba(255, 255, 255, .84);
       border: 1px solid rgba(255, 255, 255, .9);
       border-radius: 28px;
-      box-shadow: 0 20px 60px rgba(130, 70, 90, .15);
+
+      box-shadow:
+        0 20px 60px rgba(130, 70, 90, .15);
+
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+
       animation: appear .7s ease;
+
       position: relative;
       z-index: 2;
     }
@@ -81,6 +103,10 @@
         transform: translateY(0) scale(1);
       }
     }
+
+    /* =========================
+       TESTI
+    ========================= */
 
     .emoji {
       font-size: 48px;
@@ -117,6 +143,17 @@
       margin-bottom: 30px;
     }
 
+    .final-text {
+      font-size: 17px;
+      line-height: 1.6;
+      color: #705c62;
+      margin-top: 10px;
+    }
+
+    /* =========================
+       BOTTONI
+    ========================= */
+
     .buttons {
       display: flex;
       gap: 12px;
@@ -136,14 +173,17 @@
       -webkit-tap-highlight-color: transparent;
     }
 
+    button:active {
+      transform: scale(.97);
+    }
+
     .yes {
       background: #c85a73;
       color: white;
       box-shadow: 0 8px 20px rgba(200, 90, 115, .25);
     }
 
-    .yes:hover,
-    .yes:active {
+    .yes:hover {
       transform: translateY(-2px) scale(1.03);
       background: #b94d67;
     }
@@ -153,10 +193,13 @@
       color: #735e64;
     }
 
-    .no:hover,
-    .no:active {
+    .no:hover {
       transform: translateY(-2px);
     }
+
+    /* =========================
+       SCELTE
+    ========================= */
 
     .choices {
       display: grid;
@@ -168,57 +211,126 @@
     .choice {
       width: 100%;
       min-width: 0;
-      padding: 16px 10px;
+      min-height: 75px;
+
+      padding: 14px 8px;
+
       background: #fff;
       border: 1px solid #f0dce1;
       color: #59464c;
+
       box-shadow: 0 5px 15px rgba(120, 70, 85, .07);
     }
 
-    .choice:hover,
-    .choice:active {
+    .choice:hover {
       background: #fff5f7;
       border-color: #d98a9e;
       transform: translateY(-2px);
     }
 
-    .selected {
-      animation: selected .5s ease;
+    .choice-emoji {
+      display: block;
+      font-size: 25px;
+      margin-bottom: 5px;
     }
 
-    @keyframes selected {
-      0% {
-        transform: scale(1);
-      }
+    /* =========================
+       ALTRO
+    ========================= */
 
-      50% {
-        transform: scale(1.08);
-      }
-
-      100% {
-        transform: scale(1);
-      }
+    .other-box {
+      margin-top: 22px;
+      text-align: left;
     }
 
-    .final-text {
-      font-size: 17px;
-      line-height: 1.6;
+    .other-label {
+      display: block;
+      margin-bottom: 9px;
+      font-size: 14px;
       color: #705c62;
-      margin-top: 10px;
+      text-align: center;
     }
+
+    textarea {
+      width: 100%;
+      min-height: 110px;
+      resize: none;
+
+      border: 1px solid #ead1d8;
+      border-radius: 18px;
+
+      padding: 14px;
+
+      font-family: inherit;
+      font-size: 16px;
+      color: #4b3038;
+
+      background: #fff;
+
+      outline: none;
+
+      transition: border-color .25s ease, box-shadow .25s ease;
+    }
+
+    textarea:focus {
+      border-color: #c85a73;
+      box-shadow: 0 0 0 3px rgba(200, 90, 115, .1);
+    }
+
+    textarea::placeholder {
+      color: #b19da2;
+    }
+
+    .confirm-button {
+      width: 100%;
+      margin-top: 14px;
+    }
+
+    .back-button {
+      background: transparent;
+      color: #94747d;
+      font-size: 14px;
+      margin-top: 8px;
+      min-width: auto;
+      padding: 10px 20px;
+    }
+
+    /* =========================
+       FINALE
+    ========================= */
 
     .small-heart {
-      font-size: 25px;
+      font-size: 28px;
       margin-top: 22px;
     }
 
+    .success-message {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #9a7a82;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
     @media (max-width: 380px) {
+
+      body {
+        padding: 10px;
+      }
+
       .card {
         padding: 34px 18px;
+        border-radius: 24px;
       }
 
       h1 {
         font-size: 27px;
+      }
+
+      .emoji {
+        font-size: 42px;
       }
 
       .choices {
@@ -227,16 +339,20 @@
 
       .choice {
         font-size: 14px;
-        padding: 14px 7px;
+        min-height: 70px;
+        padding: 12px 5px;
       }
     }
+
   </style>
 </head>
 
 <body>
 
+  <!-- CUORI -->
   <div class="hearts" id="hearts"></div>
 
+  <!-- CONTENUTO -->
   <div class="card" id="card">
 
     <div class="emoji">❤️</div>
@@ -250,84 +366,211 @@
     </p>
 
     <div class="buttons">
-      <button class="yes" onclick="sayYes()">Sì ❤️</button>
-      <button class="no" id="noButton" onclick="sayNo()">No</button>
+
+      <button
+        class="yes"
+        onclick="sayYes()">
+        Sì ❤️
+      </button>
+
+      <button
+        class="no"
+        id="noButton"
+        onclick="sayNo()">
+        No
+      </button>
+
     </div>
 
   </div>
 
+
   <script>
 
+    /*
+    =====================================================
+    CONFIGURAZIONE
+    =====================================================
+
+    INCOLLA QUI L'URL DEL TUO GOOGLE APPS SCRIPT.
+
+    Esempio:
+
+    const API_URL =
+      "https://script.google.com/macros/s/XXXXXXXX/exec";
+
+    =====================================================
+    */
+
+    const API_URL =
+      "https://script.google.com/macros/s/AKfycbwwX2rD6ZyaSQgzcThExYzFd4eyDKMCPmrLGw8XJaJAwi-BLd6RCUCIxyxYOg4SA9oP/exec;
+
+
+    /*
+    =====================================================
+    CUORI ANIMATI
+    =====================================================
+    */
+
     function createHeart() {
+
       const heart = document.createElement("div");
+
       heart.className = "heart";
-      heart.innerHTML = Math.random() > 0.5 ? "❤️" : "♡";
 
-      heart.style.left = Math.random() * 100 + "%";
-      heart.style.fontSize = (14 + Math.random() * 18) + "px";
-      heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+      heart.innerHTML =
+        Math.random() > 0.5 ? "❤️" : "♡";
 
-      document.getElementById("hearts").appendChild(heart);
+      heart.style.left =
+        Math.random() * 100 + "%";
+
+      heart.style.fontSize =
+        (14 + Math.random() * 18) + "px";
+
+      heart.style.animationDuration =
+        (5 + Math.random() * 5) + "s";
+
+      document
+        .getElementById("hearts")
+        .appendChild(heart);
 
       setTimeout(() => {
         heart.remove();
       }, 10000);
     }
 
+
     setInterval(createHeart, 700);
 
 
+    /*
+    =====================================================
+    PRESSIONE NO
+    =====================================================
+    */
+
     function sayNo() {
 
-      const button = document.getElementById("noButton");
+      const button =
+        document.getElementById("noButton");
 
       button.innerHTML = "Sì 😏";
+
       button.classList.remove("no");
+
       button.classList.add("yes");
 
       button.onclick = sayYes;
     }
 
 
+    /*
+    =====================================================
+    PRESSIONE SI
+    =====================================================
+    */
+
     function sayYes() {
 
-      const card = document.getElementById("card");
+      const card =
+        document.getElementById("card");
 
       card.innerHTML = `
-        <div class="emoji">🥰</div>
 
-        <h1>Lo sapevo ❤️</h1>
+        <div class="emoji">
+          🥰
+        </div>
+
+        <h1>
+          Lo sapevo ❤️
+        </h1>
 
         <p class="subtitle">
           Ora però devi scegliere...
-          <br>
-          <strong>Cosa preferisci fare?</strong>
+          <br><br>
+          <strong>
+            Cosa preferisci fare?
+          </strong>
         </p>
+
 
         <div class="choices">
 
-          <button class="choice" onclick="choose('Giro in moto 🏍️')">
-            🏍️<br>Giro in moto
+          <button
+            class="choice"
+            onclick="choose('Giro in moto 🏍️')">
+
+            <span class="choice-emoji">
+              🏍️
+            </span>
+
+            Giro in moto
+
           </button>
 
-          <button class="choice" onclick="choose('Film 🎬')">
-            🎬<br>Film
+
+          <button
+            class="choice"
+            onclick="choose('Film 🎬')">
+
+            <span class="choice-emoji">
+              🎬
+            </span>
+
+            Film
+
           </button>
 
-          <button class="choice" onclick="choose('Gelato 🍦')">
-            🍦<br>Gelato
+
+          <button
+            class="choice"
+            onclick="choose('Gelato 🍦')">
+
+            <span class="choice-emoji">
+              🍦
+            </span>
+
+            Gelato
+
           </button>
 
-          <button class="choice" onclick="choose('Aperitivo 🍹')">
-            🍹<br>Aperitivo
+
+          <button
+            class="choice"
+            onclick="choose('Aperitivo 🍹')">
+
+            <span class="choice-emoji">
+              🍹
+            </span>
+
+            Aperitivo
+
           </button>
 
-          <button class="choice" onclick="choose('Biliardo 🎱')">
-            🎱<br>Biliardo
+
+          <button
+            class="choice"
+            onclick="choose('Biliardo 🎱')">
+
+            <span class="choice-emoji">
+              🎱
+            </span>
+
+            Biliardo
+
           </button>
 
-          <button class="choice" onclick="choose('Altro ✨')">
-            ✨<br>Altro
+
+          <button
+            class="choice"
+            onclick="showOther()">
+
+            <span class="choice-emoji">
+              ✨
+            </span>
+
+            Altro
+
           </button>
 
         </div>
@@ -335,57 +578,328 @@
     }
 
 
+    /*
+    =====================================================
+    ALTRO
+    =====================================================
+    */
+
+    function showOther() {
+
+      const card =
+        document.getElementById("card");
+
+      card.innerHTML = `
+
+        <div class="emoji">
+          👀
+        </div>
+
+        <h1>
+          Hai un'idea migliore?
+        </h1>
+
+        <p class="subtitle">
+          Sono curioso...
+          <br>
+          dimmi cosa avevi in mente ❤️
+        </p>
+
+
+        <div class="other-box">
+
+          <label
+            class="other-label"
+            for="otherText">
+
+            Scrivimi qui la tua idea
+
+          </label>
+
+
+          <textarea
+            id="otherText"
+            maxlength="300"
+            placeholder="Tipo... una cosa che piace a entrambi 😏">
+          </textarea>
+
+
+          <button
+            class="yes confirm-button"
+            onclick="submitOther()">
+
+            Questa! ❤️
+
+          </button>
+
+
+          <button
+            class="back-button"
+            onclick="sayYes()">
+
+            ← Torna alle opzioni
+
+          </button>
+
+        </div>
+      `;
+    }
+
+
+    /*
+    =====================================================
+    INVIO "ALTRO"
+    =====================================================
+    */
+
+    function submitOther() {
+
+      const textarea =
+        document.getElementById("otherText");
+
+      const message =
+        textarea.value.trim();
+
+
+      if (!message) {
+
+        textarea.focus();
+
+        textarea.style.borderColor =
+          "#c85a73";
+
+        textarea.placeholder =
+          "Dai, sono curioso 😏 Scrivimi qualcosa!";
+
+        return;
+      }
+
+
+      saveAnswer(
+        "Altro ✨",
+        message
+      );
+
+
+      showFinal(
+        "Altro ✨",
+        message
+      );
+    }
+
+
+    /*
+    =====================================================
+    SCELTA NORMALE
+    =====================================================
+    */
+
     function choose(option) {
 
-  const API_URL = "https://script.google.com/macros/s/AKfycbwwX2rD6ZyaSQgzcThExYzFd4eyDKMCPmrLGw8XJaJAwi-BLd6RCUCIxyxYOg4SA9oP/exec";
+      saveAnswer(
+        option,
+        ""
+      );
 
-  // Mostra subito la schermata finale
-  const card = document.getElementById("card");
 
-  card.innerHTML = `
-    <div class="emoji">💘</div>
+      showFinal(
+        option,
+        ""
+      );
+    }
 
-    <h1>Perfetto!</h1>
 
-    <p class="final-text">
-      Hai scelto:
-      <br><br>
-      <strong style="font-size: 22px;">
-        ${option}
-      </strong>
-      <br><br>
-      Allora direi che abbiamo un appuntamento ❤️
-    </p>
+    /*
+    =====================================================
+    SALVATAGGIO GOOGLE SHEETS
+    =====================================================
+    */
 
-    <div class="small-heart">
-      🥰
-    </div>
-  `;
+    function saveAnswer(
+      option,
+      message
+    ) {
 
-  // Salva la risposta su Google Sheets
-  fetch(API_URL, {
-    method: "POST",
-    mode: "no-cors",
-    headers: {
-      "Content-Type": "text/plain;charset=utf-8"
-    },
-    body: JSON.stringify({
-      token: "RICCARDO_SECRET_2026",
-      risposta: "Sì",
-      scelta: option,
-      userAgent: navigator.userAgent
-    })
-  }).catch(error => {
-    console.error("Errore nel salvataggio:", error);
-  });
+      /*
+      Il token deve essere uguale
+      a quello presente nel Google Apps Script.
+      */
 
-  // Esplosione di cuori ❤️
-  for (let i = 0; i < 20; i++) {
-    setTimeout(createHeart, i * 100);
-  }
-}
+      const data = {
+
+        token:
+          "RICCARDO_SECRET_2026",
+
+        risposta:
+          "Sì",
+
+        scelta:
+          option,
+
+        messaggio:
+          message,
+
+        userAgent:
+          navigator.userAgent
+
+      };
+
+
+      fetch(API_URL, {
+
+        method: "POST",
+
+        mode: "no-cors",
+
+        headers: {
+          "Content-Type":
+            "text/plain;charset=utf-8"
+        },
+
+        body:
+          JSON.stringify(data)
+
+      })
+      .catch(error => {
+
+        console.error(
+          "Errore nel salvataggio:",
+          error
+        );
+
+      });
+    }
+
+
+    /*
+    =====================================================
+    SCHERMATA FINALE
+    =====================================================
+    */
+
+    function showFinal(
+      option,
+      message
+    ) {
+
+      const card =
+        document.getElementById("card");
+
+
+      let extraMessage = "";
+
+
+      if (message) {
+
+        extraMessage = `
+
+          <br>
+
+          <span style="
+            font-size:15px;
+            color:#816c72;
+          ">
+            "${escapeHtml(message)}"
+          </span>
+
+        `;
+      }
+
+
+      card.innerHTML = `
+
+        <div class="emoji">
+          💘
+        </div>
+
+
+        <h1>
+          Perfetto!
+        </h1>
+
+
+        <p class="final-text">
+
+          Hai scelto:
+
+          <br><br>
+
+
+          <strong
+            style="
+              font-size:22px;
+              color:#c85a73;
+            ">
+
+            ${escapeHtml(option)}
+
+          </strong>
+
+          ${extraMessage}
+
+
+          <br><br>
+
+          Allora direi che abbiamo
+          un appuntamento ❤️
+
+        </p>
+
+
+        <div class="small-heart">
+          🥰
+        </div>
+
+
+        <p class="success-message">
+          Sapevo che avresti detto sì ❤️
+        </p>
+
+      `;
+
+
+      /*
+      Esplosione di cuori
+      */
+
+      for (
+        let i = 0;
+        i < 25;
+        i++
+      ) {
+
+        setTimeout(
+          createHeart,
+          i * 80
+        );
+
+      }
+    }
+
+
+    /*
+    =====================================================
+    SICUREZZA TESTO
+    =====================================================
+
+    Evita che eventuali caratteri HTML
+    inseriti nel campo "Altro"
+    vengano interpretati dal browser.
+    */
+
+    function escapeHtml(text) {
+
+      const div =
+        document.createElement("div");
+
+      div.textContent =
+        text;
+
+      return div.innerHTML;
+    }
 
   </script>
 
 </body>
 </html>
+```
