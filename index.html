@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Una domanda per te ❤️</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #fff5f7, #fce4ec, #fff);
+      overflow: hidden;
+      color: #3d3033;
+    }
+
+    .hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -30px;
+      font-size: 20px;
+      opacity: 0;
+      animation: floatUp linear forwards;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+
+      15% {
+        opacity: .7;
+      }
+
+      100% {
+        transform: translateY(-110vh) rotate(25deg);
+        opacity: 0;
+      }
+    }
+
+    .card {
+      width: calc(100% - 32px);
+      max-width: 430px;
+      padding: 42px 25px;
+      text-align: center;
+      background: rgba(255, 255, 255, .82);
+      border: 1px solid rgba(255, 255, 255, .9);
+      border-radius: 28px;
+      box-shadow: 0 20px 60px rgba(130, 70, 90, .15);
+      backdrop-filter: blur(12px);
+      animation: appear .7s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(.96);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .emoji {
+      font-size: 48px;
+      margin-bottom: 18px;
+      animation: heartbeat 1.7s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+
+      15% {
+        transform: scale(1.12);
+      }
+
+      30% {
+        transform: scale(1);
+      }
+    }
+
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 31px;
+      font-weight: 500;
+      margin-bottom: 12px;
+      color: #4b3038;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #816c72;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    button {
+      border: none;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 50px;
+      padding: 14px 28px;
+      min-width: 110px;
+      cursor: pointer;
+      transition: all .25s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .yes {
+      background: #c85a73;
+      color: white;
+      box-shadow: 0 8px 20px rgba(200, 90, 115, .25);
+    }
+
+    .yes:hover,
+    .yes:active {
+      transform: translateY(-2px) scale(1.03);
+      background: #b94d67;
+    }
+
+    .no {
+      background: #f3e9eb;
+      color: #735e64;
+    }
+
+    .no:hover,
+    .no:active {
+      transform: translateY(-2px);
+    }
+
+    .choices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    .choice {
+      width: 100%;
+      min-width: 0;
+      padding: 16px 10px;
+      background: #fff;
+      border: 1px solid #f0dce1;
+      color: #59464c;
+      box-shadow: 0 5px 15px rgba(120, 70, 85, .07);
+    }
+
+    .choice:hover,
+    .choice:active {
+      background: #fff5f7;
+      border-color: #d98a9e;
+      transform: translateY(-2px);
+    }
+
+    .selected {
+      animation: selected .5s ease;
+    }
+
+    @keyframes selected {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.08);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .final-text {
+      font-size: 17px;
+      line-height: 1.6;
+      color: #705c62;
+      margin-top: 10px;
+    }
+
+    .small-heart {
+      font-size: 25px;
+      margin-top: 22px;
+    }
+
+    @media (max-width: 380px) {
+      .card {
+        padding: 34px 18px;
+      }
+
+      h1 {
+        font-size: 27px;
+      }
+
+      .choices {
+        gap: 9px;
+      }
+
+      .choice {
+        font-size: 14px;
+        padding: 14px 7px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="hearts" id="hearts"></div>
+
+  <div class="card" id="card">
+
+    <div class="emoji">❤️</div>
+
+    <h1>Vuoi uscire con me?</h1>
+
+    <p class="subtitle">
+      Ho una domanda molto importante da farti...
+      <br>
+      e questa volta non puoi far finta di non averla vista 😌
+    </p>
+
+    <div class="buttons">
+      <button class="yes" onclick="sayYes()">Sì ❤️</button>
+      <button class="no" id="noButton" onclick="sayNo()">No</button>
+    </div>
+
+  </div>
+
+  <script>
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = Math.random() > 0.5 ? "❤️" : "♡";
+
+      heart.style.left = Math.random() * 100 + "%";
+      heart.style.fontSize = (14 + Math.random() * 18) + "px";
+      heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+
+      document.getElementById("hearts").appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 10000);
+    }
+
+    setInterval(createHeart, 700);
+
+
+    function sayNo() {
+
+      const button = document.getElementById("noButton");
+
+      button.innerHTML = "Sì 😏";
+      button.classList.remove("no");
+      button.classList.add("yes");
+
+      button.onclick = sayYes;
+    }
+
+
+    function sayYes() {
+
+      const card = document.getElementById("card");
+
+      card.innerHTML = `
+        <div class="emoji">🥰</div>
+
+        <h1>Lo sapevo ❤️</h1>
+
+        <p class="subtitle">
+          Ora però devi scegliere...
+          <br>
+          <strong>Cosa preferisci fare?</strong>
+        </p>
+
+        <div class="choices">
+
+          <button class="choice" onclick="choose('Giro in moto 🏍️')">
+            🏍️<br>Giro in moto
+          </button>
+
+          <button class="choice" onclick="choose('Film 🎬')">
+            🎬<br>Film
+          </button>
+
+          <button class="choice" onclick="choose('Gelato 🍦')">
+            🍦<br>Gelato
+          </button>
+
+          <button class="choice" onclick="choose('Aperitivo 🍹')">
+            🍹<br>Aperitivo
+          </button>
+
+          <button class="choice" onclick="choose('Biliardo 🎱')">
+            🎱<br>Biliardo
+          </button>
+
+          <button class="choice" onclick="choose('Altro ✨')">
+            ✨<br>Altro
+          </button>
+
+        </div>
+      `;
+    }
+
+
+    function choose(option) {
+
+      const card = document.getElementById("card");
+
+      card.innerHTML = `
+        <div class="emoji">💘</div>
+
+        <h1>Perfetto!</h1>
+
+        <p class="final-text">
+          Hai scelto:
+          <br><br>
+          <strong style="font-size: 22px;">
+            ${option}
+          </strong>
+          <br><br>
+          Allora direi che abbiamo un appuntamento ❤️
+        </p>
+
+        <div class="small-heart">
+          🥰
+        </div>
+      `;
+
+      for (let i = 0; i < 15; i++) {
+        setTimeout(createHeart, i * 100);
+      }
+    }
+
+  </script>
+
+</body>
+</html>
